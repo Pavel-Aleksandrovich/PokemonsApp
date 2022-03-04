@@ -15,11 +15,14 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         static let title = "Pokemons"
     }
     
-   private let presenter = PokemonsPresenter()
+    private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
     private var table: PokemonsTable?
     
-    init() {
+    var onCellTappedClosure: ((Int) -> ())?
+    
+    init(presenter: PokemonsListPresenter) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,17 +32,17 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
         presenter.onViewAttached(controller: self)
-        createT()
+        configureView()
+        createTableView()
     }
     
-    private func createT() {
-        
-        table = PokemonsTable(tableView: tableView, onCellTappedClosure: { [self] index in
-            self.presenter.onCellTapped(index: index)
+    private func createTableView() {
+        table = PokemonsTable(tableView: tableView, onCellTappedClosure: { [weak self] index in
+            self?.onCellTappedClosure?(index)
         })
     }
+    
     func showPokemons(pokemons: [Poke]) {
         table?.setPokemons(pokemons: pokemons)
         tableView.reloadData()
@@ -66,8 +69,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     private func configureView() {
         title = Constants.title
         
-//        tableView.delegate = self
-//        tableView.dataSource = self
         tableView.register(PokemonCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         

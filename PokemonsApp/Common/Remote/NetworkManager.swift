@@ -14,7 +14,7 @@ final class NetworkManager {
     
     func getPokemons(page: Int = 10, completed: @escaping(Result<[Poke], ErrorMessage>) -> Void) {
         
-        let endpoint = "https://pokeapi.co/api/v2/pokemon?limit=10" + "&offset=\(page)"
+        let endpoint = baseUrl + "&offset=\(page)"
         
         guard let url = URL(string: endpoint) else {
             completed(.failure(.invalidUrl))

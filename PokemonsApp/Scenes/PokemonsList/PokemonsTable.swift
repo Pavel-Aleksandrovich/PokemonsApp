@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     private enum Constants {
         static let cellIdentifier = "cellIdentifier"
@@ -49,10 +49,9 @@ class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PokemonDetails()
-        vc.configure(pokemon: pokemons[indexPath.row])
+//        let vc = PokemonDetailsViewControllerImpl()
+//        vc.configure(pokemon: pokemons[indexPath.row])
         onCellTappedClosure(indexPath.row)
-//        navigationController?.pushViewController(vc, animated: false)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -34,7 +34,6 @@ final class PokemonCell: UITableViewCell {
     }
 }
 
-// MARK: - Configure View
 private extension PokemonCell {
     
     func configureView() {

@@ -7,12 +7,23 @@
 
 import UIKit
 
-final class PokemonDetails: UIViewController {
+final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsViewController {
     
+    private let presenter: PokemonDetailsPresenter
     private let pokemonNameLabel = UILabel()
+    
+    init(presenter: PokemonDetailsPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.onViewAttached(controller: self)
         view.backgroundColor = .white
         configureLayout()
     }
