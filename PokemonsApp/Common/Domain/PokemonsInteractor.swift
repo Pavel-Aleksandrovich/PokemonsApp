@@ -24,8 +24,4 @@ final class PokemonsInteractor {
             }
         }
     }
-    
-    func fetchPokemonByIndex(index: Int) {
-        
-    }
 }

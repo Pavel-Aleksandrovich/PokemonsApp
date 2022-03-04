@@ -49,8 +49,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = PokemonDetailsViewControllerImpl()
-//        vc.configure(pokemon: pokemons[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: false)
         onCellTappedClosure(indexPath.row)
     }
     

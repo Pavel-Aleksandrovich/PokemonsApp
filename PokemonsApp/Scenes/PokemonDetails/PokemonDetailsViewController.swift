@@ -1,5 +1,5 @@
 //
-//  PokemonDetails.swift
+//  PokemonDetailsViewController.swift
 //  PokemonsApp
 //
 //  Created by pavel mishanin on 02.03.2022.
