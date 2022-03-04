@@ -15,6 +15,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         static let title = "Pokemons"
     }
     
+    private let refreshControl = UIRefreshControl()
     private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
     private var table: PokemonsTable?
@@ -35,6 +36,18 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         presenter.onViewAttached(controller: self)
         configureView()
         createTableView()
+        refreshActrion()
+    }
+    
+    private func refreshActrion() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Download")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc private func refresh(_ refreshControl: UIRefreshControl) {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     private func createTableView() {

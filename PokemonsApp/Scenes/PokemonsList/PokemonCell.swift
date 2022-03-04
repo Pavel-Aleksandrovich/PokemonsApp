@@ -59,7 +59,7 @@ private extension PokemonCell {
             title.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: Constants.titleLeading),
             title.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             title.heightAnchor.constraint(equalToConstant: Constants.titleHeight),
-            title.widthAnchor.constraint(equalToConstant: self.bounds.width/2)
+            title.widthAnchor.constraint(equalToConstant: self.bounds.width/2),
         ])
     }
 }

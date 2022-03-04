@@ -25,7 +25,6 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     init(router: PokemonDetailsRouter, pokemon: Poke) {
         self.router = router
         self.pokemon = pokemon
-        
     }
     
     func onViewAttached(controller: PokemonDetailsViewController) {
@@ -35,6 +34,5 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     
     private func fetPokemon() {
         controller?.configure(pokemon: pokemon)
-        
     }
 }
