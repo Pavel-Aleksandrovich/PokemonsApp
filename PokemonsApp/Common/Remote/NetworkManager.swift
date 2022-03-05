@@ -50,4 +50,8 @@ final class NetworkManager {
             }
         }.resume()
     }
+    
+    func fetchPokemonByUrl(url: String) -> Poke {
+        return Poke(name: "black", url: "")
+    }
 }

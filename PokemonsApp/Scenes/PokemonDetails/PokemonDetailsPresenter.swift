@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonDetailsViewController: AnyObject {
-    func configure(pokemon: Poke)
+    func configure(pokemon: State)
 }
 
 protocol PokemonDetailsPresenter {
@@ -20,19 +20,18 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private weak var controller: PokemonDetailsViewController?
     private let router: PokemonDetailsRouter
     private let interactor = PokemonsInteractor()
-    private let pokemon: Poke
+    private let pokemon: String
     
-    init(router: PokemonDetailsRouter, pokemon: Poke) {
+    init(router: PokemonDetailsRouter, pokemon: String) {
         self.router = router
         self.pokemon = pokemon
     }
     
     func onViewAttached(controller: PokemonDetailsViewController) {
         self.controller = controller
-        fetPokemon()
+        controller.configure(pokemon: .Success(interactor.fetchPokemonByUrl(url: pokemon)))
     }
     
-    private func fetPokemon() {
-        controller?.configure(pokemon: pokemon)
-    }
+    
+    
 }

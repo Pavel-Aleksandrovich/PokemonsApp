@@ -26,6 +26,7 @@
 		847BBC8427D1DAAB005E8A6C /* PokemonDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC8327D1DAAB005E8A6C /* PokemonDetailsPresenter.swift */; };
 		847BBC8627D1DAD8005E8A6C /* PokemonDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC8527D1DAD7005E8A6C /* PokemonDetailsRouter.swift */; };
 		847BBC8827D1DB31005E8A6C /* PokemonDetailsAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC8727D1DB31005E8A6C /* PokemonDetailsAssembler.swift */; };
+		847BBC8A27D31A8E005E8A6C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC8927D31A8E005E8A6C /* State.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		847BBC8327D1DAAB005E8A6C /* PokemonDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsPresenter.swift; sourceTree = "<group>"; };
 		847BBC8527D1DAD7005E8A6C /* PokemonDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsRouter.swift; sourceTree = "<group>"; };
 		847BBC8727D1DB31005E8A6C /* PokemonDetailsAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsAssembler.swift; sourceTree = "<group>"; };
+		847BBC8927D31A8E005E8A6C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				847BBC8327D1DAAB005E8A6C /* PokemonDetailsPresenter.swift */,
 				847BBC8527D1DAD7005E8A6C /* PokemonDetailsRouter.swift */,
 				847BBC8727D1DB31005E8A6C /* PokemonDetailsAssembler.swift */,
+				847BBC8927D31A8E005E8A6C /* State.swift */,
 			);
 			path = PokemonDetails;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				847BBC6927CF8002005E8A6C /* ErrorMessage.swift in Sources */,
 				847BBC8627D1DAD8005E8A6C /* PokemonDetailsRouter.swift in Sources */,
 				847BBC7227CF80DE005E8A6C /* NetworkManager.swift in Sources */,
+				847BBC8A27D31A8E005E8A6C /* State.swift in Sources */,
 				847BBC3B27CB4A3D005E8A6C /* AppDelegate.swift in Sources */,
 				847BBC7A27CF8186005E8A6C /* PokemonsListViewController.swift in Sources */,
 				847BBC8827D1DB31005E8A6C /* PokemonDetailsAssembler.swift in Sources */,

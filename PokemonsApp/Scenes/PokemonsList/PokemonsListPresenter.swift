@@ -13,11 +13,12 @@ protocol PokemonsListViewController: AnyObject {
     func showProgress()
     func hideProgress()
     func hideError()
-    var onCellTappedClosure: ((Int) -> ())? { get set }
+    var onCellTappedClosure: ((Poke) -> ())? { get set }
 }
 
 protocol PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController)
+    func onCellTapped(pokemon: Poke)
 }
 
 final class PokemonsListPresenterImpl: PokemonsListPresenter {
@@ -34,7 +35,7 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController) {
         self.controller = controller
         controller.showProgress()
-        onCellTapped()
+//        onCellTappedHandler()
         
         interactor.fetchPokemons { pokemons in
             self.controller?.hideProgress()
@@ -46,12 +47,16 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
         }
     }
     
-    private func onCellTapped() {
-        controller?.onCellTappedClosure = { [ weak self ] index in
-            let pokemon = self?.pokemons?[index]
-            guard let pokemon = pokemon else { return }
-            self?.router.presentPokemonDetails(pokemon: pokemon)
-        }
-        
+    func onCellTapped(pokemon: Poke) {
+        router.presentPokemonDetails(pokemon: pokemon.url)
     }
+    
+//    private func onCellTappedHandler() {
+//        controller?.onCellTappedClosure = { [ weak self ] pokemon in
+//            let pokemon = self?.pokemons?[index]
+//            guard let pokemon = pokemon else { return }
+//            self?.router.presentPokemonDetails(pokemon: pokemon.url)
+//        }
+//
+//    }
 }

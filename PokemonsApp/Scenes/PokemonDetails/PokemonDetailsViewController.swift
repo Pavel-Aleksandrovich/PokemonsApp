@@ -28,8 +28,19 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         configureLayout()
     }
     
-    func configure(pokemon: Poke) {
-        pokemonNameLabel.text = pokemon.name
+    func configure(pokemon: State) {
+        switch pokemon {
+        case .Success(let poke):
+            hundleSuccessState(pokemon: poke)
+        case .Error:
+            print("")
+        case .Progress:
+            print("")
+        }
+    }
+    
+    private func hundleSuccessState(pokemon: Poke) {
+        //        pokemonNameLabel.text = pokemon.name
     }
     
     private func configureLayout() {

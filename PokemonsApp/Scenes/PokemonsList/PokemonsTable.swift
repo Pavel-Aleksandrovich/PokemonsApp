@@ -16,10 +16,10 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     private var tableView: UITableView
-    private let onCellTappedClosure: (Int) -> ()
+    private let onCellTappedClosure: (Poke) -> ()
     private var pokemons: [Poke] = []
     
-    init(tableView: UITableView, onCellTappedClosure: @escaping (Int) -> ()) {
+    init(tableView: UITableView, onCellTappedClosure: @escaping (Poke) -> ()) {
         self.tableView = tableView
         self.onCellTappedClosure = onCellTappedClosure
         super.init()
@@ -50,7 +50,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        onCellTappedClosure(indexPath.row)
+        onCellTappedClosure(pokemons[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

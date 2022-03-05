@@ -8,7 +8,7 @@
 import Foundation
 
 final class PokemonsInteractor {
-    
+    // to do init as coreData
     func fetchPokemons(onSuccess: @escaping ([Poke]) -> (),
                        onError: @escaping (ErrorMessage) -> ()) {
         
@@ -24,4 +24,9 @@ final class PokemonsInteractor {
             }
         }
     }
+    
+    func fetchPokemonByUrl(url: String) -> Poke {
+        NetworkManager.shared.fetchPokemonByUrl(url: url)
+    }
+    
 }

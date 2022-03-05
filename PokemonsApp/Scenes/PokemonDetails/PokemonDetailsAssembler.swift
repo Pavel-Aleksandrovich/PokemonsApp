@@ -9,7 +9,7 @@ import UIKit
 
 final class PokemonDetailsAssembler {
     
-    static func assembly(pokemon: Poke) -> UIViewController {
+    static func assembly(pokemon: String) -> UIViewController {
         let router = PokemonDetailsRouterImpl()
         let presenter = PokemonDetailsPresenterImpl(router: router, pokemon: pokemon)
         let controller = PokemonDetailsViewControllerImpl(presenter: presenter)
