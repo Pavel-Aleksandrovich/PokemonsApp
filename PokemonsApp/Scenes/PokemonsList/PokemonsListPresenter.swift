@@ -44,13 +44,16 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     }
     
     private func fetchPokemons() {
-        interactor.fetchPokemons { pokemons in
-            self.controller?.hideProgress()
-            self.controller?.showPokemons(pokemons: pokemons)
-            self.pokemons = pokemons
-        } onError: { error in
-            self.controller?.hideProgress()
-            self.controller?.showError(error: error)
+        interactor.fetchPokemons { result in
+            switch result {
+            case .success(let pokemons):
+                self.controller?.hideProgress()
+                self.controller?.showPokemons(pokemons: pokemons)
+                self.pokemons = pokemons
+            case .failure(let error):
+                self.controller?.hideProgress()
+                self.controller?.showError(error: error)
+            }
         }
     }
 }

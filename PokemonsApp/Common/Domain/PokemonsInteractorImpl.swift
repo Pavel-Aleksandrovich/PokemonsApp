@@ -7,12 +7,19 @@
 
 import Foundation
 
+enum FetchResultPokemons {
+    case success([Poke])
+    case failure(ErrorMessage)
+}
+
+enum FetchResult {
+    case success(Poke)
+    case failure(ErrorMessage)
+}
+
 protocol PokemonsInteractor {
-    func fetchPokemons(onSuccess: @escaping ([Poke]) -> (),
-                       onError: @escaping (ErrorMessage) -> ())
-    
-    func fetchPokemonByUrl(onSuccess: @escaping (Poke) -> (),
-                           onError: @escaping (ErrorMessage) -> ())
+    func fetchPokemons(completion: @escaping (FetchResultPokemons) -> ())
+    func fetchPokemonByUrl(completion: @escaping (FetchResult) -> ())
 }
 
 final class PokemonsInteractorImpl: PokemonsInteractor {
@@ -23,31 +30,29 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         self.networkManager = networkManager
     }
     
-    func fetchPokemons(onSuccess: @escaping ([Poke]) -> (),
-                       onError: @escaping (ErrorMessage) -> ()) {
+    func fetchPokemons(completion: @escaping (FetchResultPokemons) -> ()) {
         
         networkManager.getPokemons() { result in
             
             switch result {
             case.success(let pokemons):
                 DispatchQueue.main.async {
-                    onSuccess(pokemons)
+                    completion(.success(pokemons))
                 }
             case .failure(let error):
-                onError(error)
+                completion(.failure(error))
             }
         }
     }
     
-    func fetchPokemonByUrl(onSuccess: @escaping (Poke) -> (),
-                           onError: @escaping (ErrorMessage) -> ()) {
+    func fetchPokemonByUrl(completion: @escaping (FetchResult) -> ()) {
         
         networkManager.fetchPokemonByUrl { result in
             switch result {
             case .failure(let error):
-                onError(error)
+                completion(.failure(error))
             case .success(let poke):
-                onSuccess(poke)
+                completion(.success(poke))
             }
         }
     }

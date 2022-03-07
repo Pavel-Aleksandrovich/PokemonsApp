@@ -34,10 +34,13 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     }
     
     private func fetchPokemon() {
-        interactor.fetchPokemonByUrl { poke in
-            self.controller?.configure(state: .Success(poke))
-        } onError: { error in
-            self.controller?.configure(state: .Error(error))
+        interactor.fetchPokemonByUrl { result in
+            switch result {
+            case .success(let poke):
+                self.controller?.configure(state: .Success(poke))
+            case .failure(let error):
+                self.controller?.configure(state: .Error(error))
+            }
         }
     }
 }

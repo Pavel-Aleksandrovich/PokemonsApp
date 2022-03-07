@@ -11,7 +11,7 @@ final class NetworkManager {
     
     private let baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"
     
-    func getPokemons(page: Int = 100, completed: @escaping(Result<[Poke], ErrorMessage>) -> Void) {
+    func getPokemons(page: Int = 100, completed: @escaping(FetchResultPokemons) -> ()) {
         
         let endpoint = baseUrl + "&offset=\(page)"
         
@@ -41,16 +41,14 @@ final class NetworkManager {
             do {
                 let response = try JSONDecoder().decode(PokemonList.self, from: data)
                 let pokemons = response.results
-                
                 completed(.success(pokemons))
-                
             } catch {
                 completed(.failure(.invalidData))
             }
         }.resume()
     }
     
-    func fetchPokemonByUrl(completed: @escaping(Result<Poke, ErrorMessage>) -> ()) {
+    func fetchPokemonByUrl(completed: @escaping(FetchResult) -> ()) {
         completed(.success(Poke(name: "black", url: "")))
     }
 }
