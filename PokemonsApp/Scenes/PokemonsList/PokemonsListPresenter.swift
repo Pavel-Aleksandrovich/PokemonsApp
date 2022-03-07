@@ -19,6 +19,7 @@ protocol PokemonsListViewController: AnyObject {
 protocol PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController)
     func onCellTapped(pokemon: Poke)
+    func fetchPokemons(page: Int)
 }
 
 final class PokemonsListPresenterImpl: PokemonsListPresenter {
@@ -36,20 +37,20 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController) {
         self.controller = controller
         controller.showProgress()
-        fetchPokemons()
+//        fetchPokemons()
     }
     
     func onCellTapped(pokemon: Poke) {
         router.presentPokemonDetails(pokemon: pokemon.url)
     }
     
-    private func fetchPokemons() {
-        interactor.fetchPokemons { result in
+    func fetchPokemons(page: Int) {
+        interactor.fetchPokemons(page: page) { result in
             switch result {
             case .success(let pokemons):
                 self.controller?.hideProgress()
                 self.controller?.showPokemons(pokemons: pokemons)
-                self.pokemons = pokemons
+//                self.pokemons = pokemons
             case .failure(let error):
                 self.controller?.hideProgress()
                 self.controller?.showError(error: error)

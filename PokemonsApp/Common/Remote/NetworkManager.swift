@@ -11,7 +11,7 @@ final class NetworkManager {
     
     private let baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"
     
-    func getPokemons(page: Int = 100, completed: @escaping(FetchResultPokemons) -> ()) {
+    func getPokemons(page: Int, completed: @escaping(FetchResultPokemons) -> ()) {
         
         let endpoint = baseUrl + "&offset=\(page)"
         

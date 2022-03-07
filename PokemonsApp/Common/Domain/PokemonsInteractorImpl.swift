@@ -18,7 +18,7 @@ enum FetchResult {
 }
 
 protocol PokemonsInteractor {
-    func fetchPokemons(completion: @escaping (FetchResultPokemons) -> ())
+    func fetchPokemons(page: Int, completion: @escaping (FetchResultPokemons) -> ())
     func fetchPokemonByUrl(completion: @escaping (FetchResult) -> ())
 }
 
@@ -30,9 +30,9 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         self.networkManager = networkManager
     }
     
-    func fetchPokemons(completion: @escaping (FetchResultPokemons) -> ()) {
+    func fetchPokemons(page: Int, completion: @escaping (FetchResultPokemons) -> ()) {
         
-        networkManager.getPokemons() { result in
+        networkManager.getPokemons(page: page) { result in
             
             switch result {
             case.success(let pokemons):

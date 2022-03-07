@@ -19,6 +19,10 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     private var tableView: UITableView
     private let onCellTappedClosure: (Poke) -> ()
     private var pokemons: [Poke] = []
+    private var isLoading = false
+    var offset: Int = 0
+    
+    var pageClosure: (() -> ())?
     
     init(tableView: UITableView, onCellTappedClosure: @escaping (Poke) -> ()) {
         self.tableView = tableView
@@ -29,8 +33,34 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func setPokemons(pokemons: [Poke]) {
-        self.pokemons = pokemons
-        
+        self.pokemons.append(contentsOf: pokemons)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
+            loadMoreData()
+        }
+    }
+    
+    private func loadMoreData() {
+        if !isLoading {
+            isLoading = true
+            DispatchQueue.global().async {
+                // Fake background loading task for 2 seconds
+                sleep(2)
+//                self.offset += 10
+                self.pageClosure?()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +71,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.progressCellIdentifier, for: indexPath) as! ProgressCell
-            cell.activityIsActivate(true)
+            cell.activityIsActivate()
             return cell
         }
     }

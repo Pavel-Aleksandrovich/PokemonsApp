@@ -20,13 +20,15 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
     private var table: PokemonsTable?
-    var isLoading = false
+    
+    var offset: Int = 0
     
     var onCellTappedClosure: ((Poke) -> ())?
     
     init(presenter: PokemonsListPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -39,16 +41,21 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         configureView()
         createTableView()
         refreshActrion()
+        
+        
+        
     }
     
     private func refreshActrion() {
         refreshControl.attributedTitle = NSAttributedString(string: "Download")
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
     
     @objc private func refresh(_ refreshControl: UIRefreshControl) {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         refreshControl.endRefreshing()
     }
     
@@ -57,11 +64,25 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
             self?.onCellTappedClosure?(pokemon)
             self?.presenter.onCellTapped(pokemon: pokemon)
         })
+        fff()
+    }
+    
+    func fff() {
+        table?.pageClosure = {
+            self.offset += 10
+            self.presenter.fetchPokemons(page: self.offset)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            print("fffffffff")
+        }
     }
     
     func showPokemons(pokemons: [Poke]) {
         table?.setPokemons(pokemons: pokemons)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
    
     func showError(error: ErrorMessage) {
@@ -82,29 +103,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         //
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
-            loadMoreData()
-        }
-    }
     
-    func loadMoreData() {
-        if !self.isLoading {
-            self.isLoading = true
-            DispatchQueue.global().async {
-                // Fake background loading task for 2 seconds
-                sleep(2)
-                // Download more data here
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.isLoading = false
-                }
-            }
-        }
-    }
     
     private func configureView() {
         title = Constants.title

@@ -21,7 +21,7 @@ final class ProgressCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func activityIsActivate(_ : Bool) {
+    func activityIsActivate() {
         activityView.startAnimating()
     }
     

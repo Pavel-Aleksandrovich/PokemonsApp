@@ -170,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				847BBC7D27CF820A005E8A6C /* PokemonDetailsViewController.swift */,
-				847BBC8B27D60675005E8A6C /* ProgressCell.swift */,
 				847BBC8327D1DAAB005E8A6C /* PokemonDetailsPresenter.swift */,
 				847BBC8527D1DAD7005E8A6C /* PokemonDetailsRouter.swift */,
 				847BBC8727D1DB31005E8A6C /* PokemonDetailsAssembler.swift */,
@@ -188,6 +187,7 @@
 				847BBC7F27D1BA48005E8A6C /* PokemonsListRouter.swift */,
 				847BBC8127D1BAA7005E8A6C /* PokemonsListAssembler.swift */,
 				847BBC7B27CF81E2005E8A6C /* PokemonCell.swift */,
+				847BBC8B27D60675005E8A6C /* ProgressCell.swift */,
 			);
 			path = PokemonsList;
 			sourceTree = "<group>";
