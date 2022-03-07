@@ -11,6 +11,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     
     private enum Constants {
         static let cellIdentifier = "cellIdentifier"
+        static let progressCellIdentifier = "progressCellIdentifier"
         static let heightForRow: CGFloat = 80
         static let title = "Pokemons"
     }
@@ -33,15 +34,31 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! PokemonCell
         
-        cell.configure(note: pokemons[indexPath.row])
-        
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! PokemonCell
+            cell.configure(note: pokemons[indexPath.row])
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.progressCellIdentifier, for: indexPath) as! ProgressCell
+            cell.activityIsActivate(true)
+            return cell
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemons.count
+        if section == 0 {
+            return pokemons.count
+        } else if section == 1 {
+            //Return the Loading cell
+            return 1
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

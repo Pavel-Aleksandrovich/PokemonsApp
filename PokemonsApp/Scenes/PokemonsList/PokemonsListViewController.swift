@@ -11,6 +11,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
    
     private enum Constants {
         static let cellIdentifier = "cellIdentifier"
+        static let progressCellIdentifier = "progressCellIdentifier"
         static let heightForRow: CGFloat = 80
         static let title = "Pokemons"
     }
@@ -19,6 +20,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
     private var table: PokemonsTable?
+    var isLoading = false
     
     var onCellTappedClosure: ((Poke) -> ())?
     
@@ -80,10 +82,35 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         //
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
+            loadMoreData()
+        }
+    }
+    
+    func loadMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().async {
+                // Fake background loading task for 2 seconds
+                sleep(2)
+                // Download more data here
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                }
+            }
+        }
+    }
+    
     private func configureView() {
         title = Constants.title
         
         tableView.register(PokemonCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
+        tableView.register(ProgressCell.self, forCellReuseIdentifier: Constants.progressCellIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         view.backgroundColor = .white
