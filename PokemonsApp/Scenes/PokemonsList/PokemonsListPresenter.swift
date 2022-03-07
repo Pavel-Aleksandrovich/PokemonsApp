@@ -25,11 +25,12 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     
     private weak var controller: PokemonsListViewController?
     private let router: PokemonsListRouter
-    private let interactor = PokemonsInteractorImpl()
+    private let interactor: PokemonsInteractor
     private var pokemons: [Poke]?
     
-    init(router: PokemonsListRouter) {
+    init(router: PokemonsListRouter, interactor: PokemonsInteractor) {
         self.router = router
+        self.interactor = interactor
     }
     
     func onViewAttached(controller: PokemonsListViewController) {

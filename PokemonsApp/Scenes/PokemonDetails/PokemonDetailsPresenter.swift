@@ -19,11 +19,12 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     
     private weak var controller: PokemonDetailsViewController?
     private let router: PokemonDetailsRouter
-    private let interactor = PokemonsInteractorImpl()
+    private let interactor: PokemonsInteractor
     private let pokemon: String
     
-    init(router: PokemonDetailsRouter, pokemon: String) {
+    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemon: String) {
         self.router = router
+        self.interactor = interactor
         self.pokemon = pokemon
     }
     
@@ -38,6 +39,5 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
         } onError: { error in
             self.controller?.configure(state: .Error(error))
         }
-
     }
 }

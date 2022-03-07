@@ -7,15 +7,19 @@
 
 import Foundation
 
-protocol PokemonsInteracto {
+protocol PokemonsInteractor {
+    func fetchPokemons(onSuccess: @escaping ([Poke]) -> (),
+                       onError: @escaping (ErrorMessage) -> ())
     
+    func fetchPokemonByUrl(onSuccess: @escaping (Poke) -> (),
+                           onError: @escaping (ErrorMessage) -> ())
 }
 
-final class PokemonsInteractorImpl {
+final class PokemonsInteractorImpl: PokemonsInteractor {
     
     private let networkManager: NetworkManager
     
-    init(networkManager: NetworkManager = NetworkManager()) {
+    init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
     

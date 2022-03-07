@@ -12,7 +12,9 @@ final class PokemonsListAssembler {
     static func assembly() -> UIViewController {
         
         let router = PokemonsListRouterImpl()
-        let presenter = PokemonsListPresenterImpl(router: router)
+        let networkManager = NetworkManager()
+        let interactor = PokemonsInteractorImpl(networkManager: networkManager)
+        let presenter = PokemonsListPresenterImpl(router: router, interactor: interactor)
         let controller = PokemonsListViewControllerImpl(presenter: presenter)
         router.controller = controller
         
