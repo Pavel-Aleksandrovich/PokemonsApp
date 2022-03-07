@@ -25,7 +25,7 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     
     private weak var controller: PokemonsListViewController?
     private let router: PokemonsListRouter
-    private let interactor = PokemonsInteractor()
+    private let interactor = PokemonsInteractorImpl()
     private var pokemons: [Poke]?
     
     init(router: PokemonsListRouter) {
@@ -35,8 +35,14 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController) {
         self.controller = controller
         controller.showProgress()
-//        onCellTappedHandler()
-        
+        fetchPokemons()
+    }
+    
+    func onCellTapped(pokemon: Poke) {
+        router.presentPokemonDetails(pokemon: pokemon.url)
+    }
+    
+    private func fetchPokemons() {
         interactor.fetchPokemons { pokemons in
             self.controller?.hideProgress()
             self.controller?.showPokemons(pokemons: pokemons)
@@ -46,17 +52,4 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
             self.controller?.showError(error: error)
         }
     }
-    
-    func onCellTapped(pokemon: Poke) {
-        router.presentPokemonDetails(pokemon: pokemon.url)
-    }
-    
-//    private func onCellTappedHandler() {
-//        controller?.onCellTappedClosure = { [ weak self ] pokemon in
-//            let pokemon = self?.pokemons?[index]
-//            guard let pokemon = pokemon else { return }
-//            self?.router.presentPokemonDetails(pokemon: pokemon.url)
-//        }
-//
-//    }
 }

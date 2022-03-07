@@ -9,6 +9,6 @@ import Foundation
 
 enum State {
     case Success(Poke)
-    case Error
+    case Error(ErrorMessage)
     case Progress
 }

@@ -9,7 +9,6 @@ import Foundation
 
 final class NetworkManager {
     
-    static let shared = NetworkManager()
     private let baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"
     
     func getPokemons(page: Int = 100, completed: @escaping(Result<[Poke], ErrorMessage>) -> Void) {
@@ -51,7 +50,8 @@ final class NetworkManager {
         }.resume()
     }
     
-    func fetchPokemonByUrl(url: String) -> Poke {
-        return Poke(name: "black", url: "")
+    func fetchPokemonByUrl(completed: @escaping(Result<Poke, ErrorMessage>) -> ()) {
+        completed(.success(Poke(name: "black", url: "")))
     }
 }
+

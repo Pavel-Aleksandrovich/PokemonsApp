@@ -28,14 +28,14 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         configureLayout()
     }
     
-    func configure(pokemon: State) {
-        switch pokemon {
+    func configure(state: State) {
+        switch state {
         case .Success(let poke):
             hundleSuccessState(pokemon: poke)
-        case .Error:
-            print("")
+        case .Error(let error):
+            print(error)
         case .Progress:
-            print("")
+            print("Progress")
         }
     }
     
