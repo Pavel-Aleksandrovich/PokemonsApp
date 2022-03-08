@@ -33,6 +33,8 @@
 		847BBC9327D7199A005E8A6C /* PokemonFavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9227D7199A005E8A6C /* PokemonFavoriteRouter.swift */; };
 		847BBC9527D71A05005E8A6C /* PokemonFavoriteAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9427D71A05005E8A6C /* PokemonFavoriteAssembler.swift */; };
 		847BBC9727D71E0C005E8A6C /* PokemonsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9627D71E0C005E8A6C /* PokemonsTabBarController.swift */; };
+		847BBC9927D725F3005E8A6C /* PokemonFavoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */; };
+		847BBC9B27D726D1005E8A6C /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		847BBC9227D7199A005E8A6C /* PokemonFavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFavoriteRouter.swift; sourceTree = "<group>"; };
 		847BBC9427D71A05005E8A6C /* PokemonFavoriteAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFavoriteAssembler.swift; sourceTree = "<group>"; };
 		847BBC9627D71E0C005E8A6C /* PokemonsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsTabBarController.swift; sourceTree = "<group>"; };
+		847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFavoriteTable.swift; sourceTree = "<group>"; };
+		847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				847BBC8E27D718B3005E8A6C /* PokemonFavoriteViewController.swift */,
+				847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */,
+				847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */,
 				847BBC9027D71904005E8A6C /* PokemonFavoritePresenter.swift */,
 				847BBC9227D7199A005E8A6C /* PokemonFavoriteRouter.swift */,
 				847BBC9427D71A05005E8A6C /* PokemonFavoriteAssembler.swift */,
@@ -284,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847BBC9927D725F3005E8A6C /* PokemonFavoriteTable.swift in Sources */,
 				847BBC6E27CF8098005E8A6C /* PokemonsInteractorImpl.swift in Sources */,
 				847BBC7E27CF820A005E8A6C /* PokemonDetailsViewController.swift in Sources */,
 				847BBC8427D1DAAB005E8A6C /* PokemonDetailsPresenter.swift in Sources */,
@@ -306,6 +313,7 @@
 				847BBC9127D71904005E8A6C /* PokemonFavoritePresenter.swift in Sources */,
 				847BBC7827CF8160005E8A6C /* PokemonsListPresenter.swift in Sources */,
 				847BBC8027D1BA48005E8A6C /* PokemonsListRouter.swift in Sources */,
+				847BBC9B27D726D1005E8A6C /* FavoriteCell.swift in Sources */,
 				847BBC7C27CF81E2005E8A6C /* PokemonCell.swift in Sources */,
 				847BBC7027CF80BB005E8A6C /* PokemonList.swift in Sources */,
 			);
