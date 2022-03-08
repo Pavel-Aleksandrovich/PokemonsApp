@@ -35,6 +35,8 @@
 		847BBC9727D71E0C005E8A6C /* PokemonsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9627D71E0C005E8A6C /* PokemonsTabBarController.swift */; };
 		847BBC9927D725F3005E8A6C /* PokemonFavoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */; };
 		847BBC9B27D726D1005E8A6C /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */; };
+		847BBC9E27D72CD6005E8A6C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9D27D72CD6005E8A6C /* CoreDataManager.swift */; };
+		847BBCA027D72D07005E8A6C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBC9F27D72D07005E8A6C /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		847BBC9627D71E0C005E8A6C /* PokemonsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsTabBarController.swift; sourceTree = "<group>"; };
 		847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFavoriteTable.swift; sourceTree = "<group>"; };
 		847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		847BBC9D27D72CD6005E8A6C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		847BBC9F27D72D07005E8A6C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		847BBC6427CF7FB7005E8A6C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				847BBC9C27D72C51005E8A6C /* DataStoreManager */,
 				847BBC6C27CF807B005E8A6C /* Remote */,
 				847BBC6B27CF8073005E8A6C /* Models */,
 				847BBC6A27CF8067005E8A6C /* Domain */,
@@ -221,6 +226,15 @@
 			path = PokemonFavorite;
 			sourceTree = "<group>";
 		};
+		847BBC9C27D72C51005E8A6C /* DataStoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				847BBC9D27D72CD6005E8A6C /* CoreDataManager.swift */,
+				847BBC9F27D72D07005E8A6C /* Service.swift */,
+			);
+			path = DataStoreManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +313,7 @@
 				847BBC8F27D718B3005E8A6C /* PokemonFavoriteViewController.swift in Sources */,
 				847BBC9527D71A05005E8A6C /* PokemonFavoriteAssembler.swift in Sources */,
 				847BBC8627D1DAD8005E8A6C /* PokemonDetailsRouter.swift in Sources */,
+				847BBCA027D72D07005E8A6C /* Service.swift in Sources */,
 				847BBC7227CF80DE005E8A6C /* NetworkManager.swift in Sources */,
 				847BBC8A27D31A8E005E8A6C /* State.swift in Sources */,
 				847BBC9327D7199A005E8A6C /* PokemonFavoriteRouter.swift in Sources */,
@@ -306,6 +321,7 @@
 				847BBC7A27CF8186005E8A6C /* PokemonsListViewController.swift in Sources */,
 				847BBC9727D71E0C005E8A6C /* PokemonsTabBarController.swift in Sources */,
 				847BBC8C27D60675005E8A6C /* ProgressCell.swift in Sources */,
+				847BBC9E27D72CD6005E8A6C /* CoreDataManager.swift in Sources */,
 				847BBC8827D1DB31005E8A6C /* PokemonDetailsAssembler.swift in Sources */,
 				847BBC7627CF8148005E8A6C /* PokemonsTable.swift in Sources */,
 				847BBC3D27CB4A3D005E8A6C /* SceneDelegate.swift in Sources */,
