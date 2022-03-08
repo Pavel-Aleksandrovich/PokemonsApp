@@ -21,7 +21,7 @@ final class ProgressCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func activityIsActivate() {
+    func activityStartAnimating() {
         activityView.startAnimating()
     }
     
@@ -33,7 +33,7 @@ final class ProgressCell: UITableViewCell {
         addSubview(activityView)
     }
     
-   private func configureLayoutConstraints() {
+    private func configureLayoutConstraints() {
         
         NSLayoutConstraint.activate([
             activityView.centerYAnchor.constraint(equalTo: self.centerYAnchor),

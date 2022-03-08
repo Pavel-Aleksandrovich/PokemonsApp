@@ -37,7 +37,6 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController) {
         self.controller = controller
         controller.showProgress()
-//        fetchPokemons()
     }
     
     func onCellTapped(pokemon: Poke) {

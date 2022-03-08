@@ -20,7 +20,6 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     private let onCellTappedClosure: (Poke) -> ()
     private var pokemons: [Poke] = []
     private var isLoading = false
-    var offset: Int = 0
     
     var pageClosure: (() -> ())?
     
@@ -51,9 +50,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
         if !isLoading {
             isLoading = true
             DispatchQueue.global().async {
-                // Fake background loading task for 2 seconds
                 sleep(2)
-//                self.offset += 10
                 self.pageClosure?()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -71,7 +68,7 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.progressCellIdentifier, for: indexPath) as! ProgressCell
-            cell.activityIsActivate()
+            cell.activityStartAnimating()
             return cell
         }
     }
@@ -98,12 +95,5 @@ final class PokemonsTable: NSObject, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         onCellTappedClosure(pokemons[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == tableView.numberOfSections - 1 && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-            
-//            self.getPokemons()
-        }
     }
 }

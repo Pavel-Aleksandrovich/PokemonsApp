@@ -28,7 +28,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     init(presenter: PokemonsListPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -41,9 +40,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         configureView()
         createTableView()
         refreshActrion()
-        
-        
-        
     }
     
     private func refreshActrion() {
@@ -64,25 +60,18 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
             self?.onCellTappedClosure?(pokemon)
             self?.presenter.onCellTapped(pokemon: pokemon)
         })
-        fff()
+        loadMorePokemons()
     }
     
-    func fff() {
+    private func loadMorePokemons() {
         table?.pageClosure = {
             self.offset += 10
             self.presenter.fetchPokemons(page: self.offset)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            print("fffffffff")
         }
     }
     
     func showPokemons(pokemons: [Poke]) {
         table?.setPokemons(pokemons: pokemons)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
    
     func showError(error: ErrorMessage) {
@@ -102,8 +91,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     func hideError() {
         //
     }
-    
-    
     
     private func configureView() {
         title = Constants.title
