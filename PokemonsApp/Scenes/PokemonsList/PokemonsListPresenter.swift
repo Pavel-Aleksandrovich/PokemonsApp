@@ -13,7 +13,6 @@ protocol PokemonsListViewController: AnyObject {
     func showProgress()
     func hideProgress()
     func hideError()
-    var onCellTappedClosure: ((Poke) -> ())? { get set }
 }
 
 protocol PokemonsListPresenter {

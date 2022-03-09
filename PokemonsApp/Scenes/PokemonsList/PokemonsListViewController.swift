@@ -21,9 +21,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     private let tableView = UITableView()
     private var table: PokemonsTable?
     
-    var offset: Int = 0
-    
-    var onCellTappedClosure: ((Poke) -> ())?
+    private var offset: Int = 0
     
     init(presenter: PokemonsListPresenter) {
         self.presenter = presenter
@@ -57,7 +55,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     
     private func createTableView() {
         table = PokemonsTable(tableView: tableView, onCellTappedClosure: { [weak self] pokemon in
-            self?.onCellTappedClosure?(pokemon)
             self?.presenter.onCellTapped(pokemon: pokemon)
         })
         loadMorePokemons()

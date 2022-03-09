@@ -49,20 +49,37 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         view.backgroundColor = .white
         
         favoriteImageView.image = UIImage(systemName: "star") //star.fill
-        favoriteImageView.contentMode = .scaleAspectFill
+        favoriteImageView.isUserInteractionEnabled = true
+        favoriteImageView.contentMode = .scaleAspectFit
         
         deleteImageView.image = UIImage(systemName: "trash")
         deleteImageView.contentMode = .scaleAspectFit
+        deleteImageView.isUserInteractionEnabled = true
+    }
+    
+    private func configureActions() {
+        
+        let favorite = UITapGestureRecognizer(target: self, action: #selector(addToFavorite))
+        favoriteImageView.addGestureRecognizer(favorite)
+        
+        let trash = UITapGestureRecognizer(target: self, action: #selector(deleteFromFavorite))
+        deleteImageView.addGestureRecognizer(trash)
+    }
+    
+    @objc func addToFavorite(_ sender: UITapGestureRecognizer) {
+        print("addToFavorite")
+    }
+    
+    @objc func deleteFromFavorite(_ sender: UITapGestureRecognizer) {
+        print("deleteFromFavorite")
     }
     
     private func configureLayout() {
         
         [pokemonNameLabel, favoriteImageView, deleteImageView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
         }
-        view.addSubview(pokemonNameLabel)
-        view.addSubview(favoriteImageView)
-        view.addSubview(deleteImageView)
         
         NSLayoutConstraint.activate([
             pokemonNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
