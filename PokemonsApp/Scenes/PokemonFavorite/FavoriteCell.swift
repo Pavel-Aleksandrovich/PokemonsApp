@@ -30,7 +30,6 @@ final class FavoriteCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-//        pokemonTitle.clipsToBounds = true
         addSubview(titleLabel)
     }
     

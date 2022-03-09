@@ -19,7 +19,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     private let refreshControl = UIRefreshControl()
     private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
-    private var table: PokemonsTable?
+    private var table: PokemonsTable!
     
     private var offset: Int = 0
     
@@ -36,8 +36,8 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         super.viewDidLoad()
         presenter.onViewAttached(controller: self)
         configureView()
-        createTableView()
         refreshActrion()
+        createTableView()
     }
     
     private func refreshActrion() {
@@ -54,21 +54,21 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     }
     
     private func createTableView() {
-        table = PokemonsTable(tableView: tableView, onCellTappedClosure: { [weak self] pokemon in
+        table = PokemonsTableImpl(tableView: tableView, viewController: self, onCellTappedClosure: { [weak self] pokemon in
             self?.presenter.onCellTapped(pokemon: pokemon)
         })
         loadMorePokemons()
     }
     
     private func loadMorePokemons() {
-        table?.pageClosure = {
+        table.pageClosure = {
             self.offset += 10
             self.presenter.fetchPokemons(page: self.offset)
         }
     }
     
     func showPokemons(pokemons: [Poke]) {
-        table?.setPokemons(pokemons: pokemons)
+        table.setPokemons(pokemons: pokemons)
     }
    
     func showError(error: ErrorMessage) {
@@ -91,19 +91,5 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     
     private func configureView() {
         title = Constants.title
-        
-        tableView.register(PokemonCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
-        tableView.register(ProgressCell.self, forCellReuseIdentifier: Constants.progressCellIdentifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.backgroundColor = .white
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }

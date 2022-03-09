@@ -38,7 +38,7 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
         configureState()
     }
     
-    private func fetchPokemon() {
+    private func fetchPokemon(kk: Result<Poke, Error>) {
         interactor.fetchPokemonByUrl { result in
             switch result {
             case .success(let poke):

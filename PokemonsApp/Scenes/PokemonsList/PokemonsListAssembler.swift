@@ -18,6 +18,6 @@ final class PokemonsListAssembler {
         let controller = PokemonsListViewControllerImpl(presenter: presenter)
         router.controller = controller
         
-        return controller
+        return UINavigationController(rootViewController: controller)
     }
 }

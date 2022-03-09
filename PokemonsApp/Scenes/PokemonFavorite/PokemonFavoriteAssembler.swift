@@ -16,6 +16,6 @@ final class PokemonFavoriteAssembler {
         let presenter = PokemonFavoritePresenterImpl(router: router, pokemonService: pokemonService)
         let controller = PokemonFavoriteViewControllerImpl(presenter: presenter)
         
-        return controller
+        return UINavigationController(rootViewController: controller) 
     }
 }

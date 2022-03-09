@@ -27,7 +27,6 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     }
     
     func setPokemons(pokemons: [PokemonEntity]) {
-        print(pokemons.count)
         self.pokemons = pokemons
         DispatchQueue.main.async {
             self.tableView.reloadData()
