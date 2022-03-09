@@ -12,7 +12,8 @@ final class PokemonFavoriteAssembler {
     static func assembly() -> UIViewController {
         
         let router = PokemonFavoriteRouterImpl()
-        let presenter = PokemonFavoritePresenterImpl(router: router)
+        let pokemonService = PokemonServiceImpl()
+        let presenter = PokemonFavoritePresenterImpl(router: router, pokemonService: pokemonService)
         let controller = PokemonFavoriteViewControllerImpl(presenter: presenter)
         
         return controller

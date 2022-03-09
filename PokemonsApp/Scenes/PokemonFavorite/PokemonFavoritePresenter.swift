@@ -12,21 +12,27 @@ protocol PokemonFavoritePresenter {
 }
 
 protocol PokemonFavoriteViewController: AnyObject {
-    
+    func getPokemons(pokemons: [PokemonEntity])
 }
 
 final class PokemonFavoritePresenterImpl: PokemonFavoritePresenter {
     
     private weak var controller: PokemonFavoriteViewController?
     private let router: PokemonFavoriteRouter
+    private let pokemonService: PokemonService
     
     func onViewAttached(controller: PokemonFavoriteViewController) {
         self.controller = controller
+        getPokemons()
     }
     
-    init(router: PokemonFavoriteRouter) {
+    init(router: PokemonFavoriteRouter, pokemonService: PokemonService) {
         self.router = router
+        self.pokemonService = pokemonService
     }
     
-    
+    private func getPokemons() {
+        let pokemons = pokemonService.getAllPokemons()
+        controller?.getPokemons(pokemons: pokemons)
+    }
 }

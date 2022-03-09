@@ -9,7 +9,7 @@ import UIKit
 
 final class FavoriteCell: UITableViewCell {
     
-    private let pokemonTitle = UILabel()
+    private let titleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,20 +21,24 @@ final class FavoriteCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(pokemon: PokemonEntity) {
+        titleLabel.text = pokemon.name
+    }
+    
     private func configureView() {
-        [pokemonTitle].forEach {
+        [titleLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        pokemonTitle.clipsToBounds = true
-        addSubview(pokemonTitle)
+//        pokemonTitle.clipsToBounds = true
+        addSubview(titleLabel)
     }
     
     private func configureLayoutConstraints() {
         
         NSLayoutConstraint.activate([
-            pokemonTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            pokemonTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
 }

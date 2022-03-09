@@ -17,7 +17,7 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     }
     
     private var tableView: UITableView
-    private var pokemons: [Poke] = []
+    private var pokemons: [PokemonEntity] = []
     
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -26,8 +26,9 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
     }
     
-    func setPokemons(pokemons: [Poke]) {
-        self.pokemons.append(contentsOf: pokemons)
+    func setPokemons(pokemons: [PokemonEntity]) {
+        print(pokemons.count)
+        self.pokemons = pokemons
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -35,7 +36,8 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! FavoriteCell
-//        cell.configure(note: pokemons[indexPath.row])
+        
+        cell.configure(pokemon: pokemons[indexPath.row])
         return cell
     }
     

@@ -9,6 +9,7 @@ import Foundation
 
 protocol PokemonDetailsViewController: AnyObject {
     func configure(state: State)
+    var deleteOrFavoriteClosure: ((DeleteOrFavorite) -> ())? { get set }
 }
 
 protocol PokemonDetailsPresenter {
@@ -20,17 +21,21 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private weak var controller: PokemonDetailsViewController?
     private let router: PokemonDetailsRouter
     private let interactor: PokemonsInteractor
+    private let pokemonService: PokemonService
     private let pokemon: Poke
     
-    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemon: Poke) {
+    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemonService: PokemonService, pokemon: Poke) {
         self.router = router
         self.interactor = interactor
+        self.pokemonService = pokemonService
         self.pokemon = pokemon
     }
     
     func onViewAttached(controller: PokemonDetailsViewController) {
         self.controller = controller
-        fetchPokemon()
+//        fetchPokemon()
+        controller.configure(state: .Success(pokemon))
+        configureState()
     }
     
     private func fetchPokemon() {
@@ -43,4 +48,24 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
             }
         }
     }
+    
+    private func configureState() {
+        controller?.deleteOrFavoriteClosure = { state in
+            switch state {
+            case .favorite:
+                self.addToFavorite()
+            case .delete:
+                self.deleteFromFavorite()
+            }
+        }
+    }
+    
+    private func addToFavorite() {
+        pokemonService.createPokemon(sourcePokemon: pokemon)
+    }
+    
+    private func deleteFromFavorite() {
+        
+    }
+    
 }

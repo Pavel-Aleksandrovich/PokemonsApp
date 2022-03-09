@@ -7,12 +7,19 @@
 
 import UIKit
 
+enum DeleteOrFavorite {
+    case delete
+    case favorite
+}
+
 final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsViewController {
     
     private let presenter: PokemonDetailsPresenter
     private let pokemonNameLabel = UILabel()
     private let favoriteImageView = UIImageView()
     private let deleteImageView = UIImageView()
+    
+    var deleteOrFavoriteClosure: ((DeleteOrFavorite) -> ())?
     
     init(presenter: PokemonDetailsPresenter) {
         self.presenter = presenter
@@ -28,6 +35,7 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         presenter.onViewAttached(controller: self)
         configureView()
         configureLayout()
+        configureActions()
     }
     
     func configure(state: State) {
@@ -48,7 +56,7 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
     private func configureView() {
         view.backgroundColor = .white
         
-        favoriteImageView.image = UIImage(systemName: "star") //star.fill
+        favoriteImageView.image = UIImage(systemName: "heart") //heart.fill
         favoriteImageView.isUserInteractionEnabled = true
         favoriteImageView.contentMode = .scaleAspectFit
         
@@ -67,11 +75,11 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
     }
     
     @objc func addToFavorite(_ sender: UITapGestureRecognizer) {
-        print("addToFavorite")
+        deleteOrFavoriteClosure?(.favorite)
     }
     
     @objc func deleteFromFavorite(_ sender: UITapGestureRecognizer) {
-        print("deleteFromFavorite")
+        deleteOrFavoriteClosure?(.delete)
     }
     
     private func configureLayout() {

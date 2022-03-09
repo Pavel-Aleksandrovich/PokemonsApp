@@ -14,7 +14,8 @@ final class PokemonDetailsAssembler {
         let router = PokemonDetailsRouterImpl()
         let networkManager = NetworkManager()
         let interactor = PokemonsInteractorImpl(networkManager: networkManager)
-        let presenter = PokemonDetailsPresenterImpl(router: router, interactor: interactor, pokemon: pokemon)
+        let pokemonService = PokemonServiceImpl()
+        let presenter = PokemonDetailsPresenterImpl(router: router, interactor: interactor, pokemonService: pokemonService, pokemon: pokemon)
         let controller = PokemonDetailsViewControllerImpl(presenter: presenter)
         router.controller = controller
         

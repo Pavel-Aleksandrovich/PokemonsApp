@@ -8,7 +8,7 @@
 import UIKit
 
 final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavoriteViewController {
-    
+
     private enum Constants {
         static let cellIdentifier = "FavoriteCell"
         static let progressCellIdentifier = "progressCellIdentifier"
@@ -23,7 +23,6 @@ final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavorite
     init(presenter: PokemonFavoritePresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        presenter.onViewAttached(controller: self)
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +32,12 @@ final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavorite
     override func viewDidLoad() {
         super.viewDidLoad()
         createTableView()
+        presenter.onViewAttached(controller: self)
         configureView()
+    }
+    
+    func getPokemons(pokemons: [PokemonEntity]) {
+        table?.setPokemons(pokemons: pokemons)
     }
     
     private func createTableView() {
