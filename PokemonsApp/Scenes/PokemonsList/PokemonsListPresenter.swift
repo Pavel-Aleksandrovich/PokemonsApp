@@ -40,7 +40,7 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
     }
     
     func onCellTapped(pokemon: Poke) {
-        router.presentPokemonDetails(pokemon: pokemon.url)
+        router.presentPokemonDetails(pokemon: pokemon)
     }
     
     func fetchPokemons(page: Int) {

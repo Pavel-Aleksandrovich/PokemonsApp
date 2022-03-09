@@ -20,9 +20,9 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private weak var controller: PokemonDetailsViewController?
     private let router: PokemonDetailsRouter
     private let interactor: PokemonsInteractor
-    private let pokemon: String
+    private let pokemon: Poke
     
-    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemon: String) {
+    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemon: Poke) {
         self.router = router
         self.interactor = interactor
         self.pokemon = pokemon

@@ -7,16 +7,16 @@
 
 import UIKit
 
-class PokemonsTabBarController: UITabBarController {
+final class PokemonsTabBarController: UITabBarController {
     
-    var pokemonsList = PokemonsListAssembler.assembly()
-    var pokemonFavorite = PokemonFavoriteAssembler.assembly()
+    private let pokemonsList = PokemonsListAssembler.assembly()
+    private let pokemonFavorite = PokemonFavoriteAssembler.assembly()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pokemonsList.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-        pokemonFavorite.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
+        pokemonsList.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
+        pokemonFavorite.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
         viewControllers = [pokemonsList, pokemonFavorite]
     }
