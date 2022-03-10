@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonDetailsViewController: AnyObject {
-    func configure(pokemon: Pokemon)
+    func configure(pokemon: CustomPokemon)
     var deleteOrFavoriteClosure: ((DeleteOrFavorite) -> ())? { get set }
 }
 
@@ -39,26 +39,23 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     }
     
     private func fetchPokemon() {
-        interactor.fetchPokemonByUrl(url: pokemon.url) { state in
+        interactor.fetchPokemonBy(url: pokemon.url) { state in
             switch state {
             case .failure(let error):
                 print(error)
             case .success(let pokemon):
-                self.controller?.configure(pokemon: pokemon)
+                self.configure(pokemon: pokemon)
             }
         }
     }
-    
-//    private func fetchPokemon() {
-//        interactor.fetchPokemonByUrl { result in
-//            switch result {
-//            case .success(let poke):
-//                self.controller?.configure(state: .Success(poke))
-//            case .failure(let error):
-//                self.controller?.configure(state: .Error(error))
-//            }
-//        }
-//    }
+
+    private func configure(pokemon: Pokemon) {
+        let url = pokemon.sprites.frontDefault
+        interactor.loadPokemonPhotoBy(url: url) { data in
+            let customPokemon = CustomPokemon(name: pokemon.name, image: data)
+            self.controller?.configure(pokemon: customPokemon)
+        }
+    }
     
     private func configureState() {
         controller?.deleteOrFavoriteClosure = { state in
@@ -78,5 +75,4 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private func deleteFromFavorite() {
         
     }
-    
 }

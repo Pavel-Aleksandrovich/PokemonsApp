@@ -19,7 +19,8 @@ enum FetchResult {
 
 protocol PokemonsInteractor {
     func fetchPokemons(page: Int, completion: @escaping (ObtainResult) -> ())
-    func fetchPokemonByUrl(url: String, completion: @escaping (FetchResult) -> ())
+    func fetchPokemonBy(url: String, completion: @escaping (FetchResult) -> ())
+    func loadPokemonPhotoBy(url: String, completed: @escaping(Data) -> ())
 }
 
 final class PokemonsInteractorImpl: PokemonsInteractor {
@@ -45,9 +46,9 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         }
     }
     
-    func fetchPokemonByUrl(url: String, completion: @escaping (FetchResult) -> ()) {
+    func fetchPokemonBy(url: String, completion: @escaping (FetchResult) -> ()) {
         
-        networkManager.fetchPokemonByUrl(url: url) { result in
+        networkManager.fetchPokemonBy(url: url) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -57,4 +58,10 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         }
     }
     
+    func loadPokemonPhotoBy(url: String, completed: @escaping(Data) -> ()) {
+        
+        networkManager.loadPokemonPhotoBy(url: url) { data in
+            completed(data)
+        }
+    }
 }

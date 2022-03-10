@@ -45,22 +45,10 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         configureActions()
     }
     
-    func configure(pokemon: Pokemon) {
+    func configure(pokemon: CustomPokemon) {
         DispatchQueue.main.async {
             self.pokemonNameLabel.text = pokemon.name
-            self.loadPhoto(string: pokemon.sprites.frontShiny)
-        }
-    }
-    
-    private func loadPhoto(string: String) {
-        let imageURL = URL(string: string)!
-        
-        DispatchQueue.global(qos: .utility).async { [ weak self ] in
-            if let data = try? Data(contentsOf: imageURL){
-                DispatchQueue.main.async {
-                    self?.pokemonImageView.image = UIImage(data: data)
-                }
-            }
+            self.pokemonImageView.image = UIImage(data: pokemon.image)
         }
     }
     

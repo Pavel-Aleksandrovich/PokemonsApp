@@ -40,6 +40,7 @@
 		847BBCA527D87631005E8A6C /* PokemonEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBCA327D87631005E8A6C /* PokemonEntity+CoreDataClass.swift */; };
 		847BBCA627D87631005E8A6C /* PokemonEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBCA427D87631005E8A6C /* PokemonEntity+CoreDataProperties.swift */; };
 		847BBCA827D9AAB6005E8A6C /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBCA727D9AAB6005E8A6C /* RefreshControl.swift */; };
+		847BBCAB27DA0FB0005E8A6C /* CustomPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BBCAA27DA0FB0005E8A6C /* CustomPokemon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		847BBCA327D87631005E8A6C /* PokemonEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		847BBCA427D87631005E8A6C /* PokemonEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		847BBCA727D9AAB6005E8A6C /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
+		847BBCAA27DA0FB0005E8A6C /* CustomPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPokemon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				847BBC6F27CF80BB005E8A6C /* PokemonList.swift */,
+				847BBCAA27DA0FB0005E8A6C /* CustomPokemon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			files = (
 				847BBC9927D725F3005E8A6C /* PokemonFavoriteTable.swift in Sources */,
 				847BBC6E27CF8098005E8A6C /* PokemonsInteractorImpl.swift in Sources */,
+				847BBCAB27DA0FB0005E8A6C /* CustomPokemon.swift in Sources */,
 				847BBC7E27CF820A005E8A6C /* PokemonDetailsViewController.swift in Sources */,
 				847BBC8427D1DAAB005E8A6C /* PokemonDetailsPresenter.swift in Sources */,
 				847BBC4527CB4A3D005E8A6C /* PokemonsApp.xcdatamodeld in Sources */,

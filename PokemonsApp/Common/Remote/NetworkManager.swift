@@ -52,7 +52,7 @@ final class NetworkManager {
         }.resume()
     }
     
-    func fetchPokemonByUrl(url: String, completed: @escaping(FetchResult) -> ()) {
+    func fetchPokemonBy(url: String, completed: @escaping(FetchResult) -> ()) {
         
         guard let url = URL(string: url) else {
             completed(.failure(.invalidUrl))
@@ -84,6 +84,18 @@ final class NetworkManager {
                 completed(.failure(.invalidData))
             }
         }.resume()
+    }
+    
+    func loadPokemonPhotoBy(url: String, completed: @escaping(Data) -> ()) {
+        let imageURL = URL(string: url)!
+        
+        DispatchQueue.global(qos: .utility).async {
+            if let data = try? Data(contentsOf: imageURL) {
+                DispatchQueue.main.async {
+                    completed(data)
+                }
+            }
+        }
     }
 }
 
