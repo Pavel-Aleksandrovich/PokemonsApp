@@ -12,13 +12,9 @@ enum DeleteOrFavorite {
     case favorite
 }
 
-enum ObtainPostResult {
-   case success(post: Pokemon)
-   case failure(error: Error)
-}
-
 final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsViewController {
     
+    private let activityView = UIActivityIndicatorView()
     private let presenter: PokemonDetailsPresenter
     private let pokemonNameLabel = UILabel()
     private let favoriteImageView = UIImageView()
@@ -43,12 +39,14 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
         
         configureLayout()
         configureActions()
+        activityView.startAnimating()
     }
     
     func configure(pokemon: CustomPokemon) {
         DispatchQueue.main.async {
             self.pokemonNameLabel.text = pokemon.name
             self.pokemonImageView.image = UIImage(data: pokemon.image)
+            self.activityView.stopAnimating()
         }
     }
     
@@ -83,7 +81,7 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
     
     private func configureLayout() {
         
-        [pokemonNameLabel, favoriteImageView, deleteImageView, pokemonImageView].forEach {
+        [pokemonNameLabel, favoriteImageView, deleteImageView, pokemonImageView, activityView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -106,6 +104,9 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
             deleteImageView.topAnchor.constraint(equalTo: favoriteImageView.bottomAnchor, constant: 20),
             deleteImageView.heightAnchor.constraint(equalToConstant: 60),
             deleteImageView.widthAnchor.constraint(equalToConstant: 60),
+            
+            activityView.centerYAnchor.constraint(equalTo: pokemonImageView.centerYAnchor),
+            activityView.centerXAnchor.constraint(equalTo: pokemonImageView.centerXAnchor),
             
         ])
     }
