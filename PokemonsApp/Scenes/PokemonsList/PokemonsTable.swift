@@ -21,6 +21,7 @@ final class PokemonsTableImpl: NSObject, PokemonsTable, UITableViewDelegate, UIT
         static let title = "Pokemons"
     }
     
+    private let refreshControl: RefreshControl
     private weak var viewController: UIViewController?
     private let tableView: UITableView
     private let onCellTappedClosure: (Poke) -> ()
@@ -33,8 +34,8 @@ final class PokemonsTableImpl: NSObject, PokemonsTable, UITableViewDelegate, UIT
         self.tableView = tableView
         self.viewController = viewController
         self.onCellTappedClosure = onCellTappedClosure
+        refreshControl = RefreshControl(tableView: tableView)
         super.init()
-        
         configureTableView()
     }
     

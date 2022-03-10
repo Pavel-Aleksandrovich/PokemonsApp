@@ -16,7 +16,6 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         static let title = "Pokemons"
     }
     
-    private let refreshControl = UIRefreshControl()
     private let presenter: PokemonsListPresenter
     private let tableView = UITableView()
     private var table: PokemonsTable!
@@ -36,21 +35,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         super.viewDidLoad()
         presenter.onViewAttached(controller: self)
         configureView()
-        refreshActrion()
         createTableView()
-    }
-    
-    private func refreshActrion() {
-        refreshControl.attributedTitle = NSAttributedString(string: "Download")
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-    }
-    
-    @objc private func refresh(_ refreshControl: UIRefreshControl) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        refreshControl.endRefreshing()
     }
     
     private func createTableView() {
@@ -78,7 +63,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     }
     
     func showProgress() {
-        
+        //
     }
     
     func hideProgress() {
