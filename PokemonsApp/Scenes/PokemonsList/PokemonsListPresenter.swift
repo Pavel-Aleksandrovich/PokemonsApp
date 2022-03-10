@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonsListViewController: AnyObject {
-    func showPokemons(pokemons: [Poke])
+    func showPokemons(pokemons: PokemonList)
     func showError(error: ErrorMessage)
     func showProgress()
     func hideProgress()

@@ -52,7 +52,7 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
         }
     }
     
-    func showPokemons(pokemons: [Poke]) {
+    func showPokemons(pokemons: PokemonList) {
         table.setPokemons(pokemons: pokemons)
     }
    

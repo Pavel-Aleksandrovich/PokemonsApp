@@ -13,13 +13,13 @@ enum FetchResultPokemons {
 }
 
 enum FetchResult {
-    case success(Poke)
+    case success(Pokemon)
     case failure(ErrorMessage)
 }
 
 protocol PokemonsInteractor {
-    func fetchPokemons(page: Int, completion: @escaping (FetchResultPokemons) -> ())
-    func fetchPokemonByUrl(completion: @escaping (FetchResult) -> ())
+    func fetchPokemons(page: Int, completion: @escaping (ObtainResult) -> ())
+    func fetchPokemonByUrl(url: String, completion: @escaping (FetchResult) -> ())
 }
 
 final class PokemonsInteractorImpl: PokemonsInteractor {
@@ -30,7 +30,7 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         self.networkManager = networkManager
     }
     
-    func fetchPokemons(page: Int, completion: @escaping (FetchResultPokemons) -> ()) {
+    func fetchPokemons(page: Int, completion: @escaping (ObtainResult) -> ()) {
         
         networkManager.getPokemons(page: page) { result in
             
@@ -45,9 +45,9 @@ final class PokemonsInteractorImpl: PokemonsInteractor {
         }
     }
     
-    func fetchPokemonByUrl(completion: @escaping (FetchResult) -> ()) {
+    func fetchPokemonByUrl(url: String, completion: @escaping (FetchResult) -> ()) {
         
-        networkManager.fetchPokemonByUrl { result in
+        networkManager.fetchPokemonByUrl(url: url) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))

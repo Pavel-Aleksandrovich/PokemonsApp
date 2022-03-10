@@ -8,7 +8,7 @@
 import Foundation
 
 enum State {
-    case Success(Poke)
+    case Success(Pokemon)
     case Error(ErrorMessage)
     case Progress
 }

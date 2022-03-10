@@ -12,12 +12,18 @@ enum DeleteOrFavorite {
     case favorite
 }
 
+enum ObtainPostResult {
+   case success(post: Pokemon)
+   case failure(error: Error)
+}
+
 final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsViewController {
     
     private let presenter: PokemonDetailsPresenter
     private let pokemonNameLabel = UILabel()
     private let favoriteImageView = UIImageView()
     private let deleteImageView = UIImageView()
+    private let pokemonImageView = UIImageView()
     
     var deleteOrFavoriteClosure: ((DeleteOrFavorite) -> ())?
     
@@ -32,25 +38,30 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.onViewAttached(controller: self)
         configureView()
+        presenter.onViewAttached(controller: self)
+        
         configureLayout()
         configureActions()
     }
     
-    func configure(state: State) {
-        switch state {
-        case .Success(let poke):
-            hundleSuccessState(pokemon: poke)
-        case .Error(let error):
-            print(error)
-        case .Progress:
-            print("Progress")
+    func configure(pokemon: Pokemon) {
+        DispatchQueue.main.async {
+            self.pokemonNameLabel.text = pokemon.name
+            self.loadPhoto(string: pokemon.sprites.frontShiny)
         }
     }
     
-    private func hundleSuccessState(pokemon: Poke) {
-        pokemonNameLabel.text = pokemon.name
+    private func loadPhoto(string: String) {
+        let imageURL = URL(string: string)!
+        
+        DispatchQueue.global(qos: .utility).async { [ weak self ] in
+            if let data = try? Data(contentsOf: imageURL){
+                DispatchQueue.main.async {
+                    self?.pokemonImageView.image = UIImage(data: data)
+                }
+            }
+        }
     }
     
     private func configureView() {
@@ -84,14 +95,19 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
     
     private func configureLayout() {
         
-        [pokemonNameLabel, favoriteImageView, deleteImageView].forEach {
+        [pokemonNameLabel, favoriteImageView, deleteImageView, pokemonImageView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
+            pokemonImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pokemonImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            pokemonImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            pokemonImageView.widthAnchor.constraint(equalTo: pokemonImageView.heightAnchor),
+            
             pokemonNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pokemonNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            pokemonNameLabel.topAnchor.constraint(equalTo: pokemonImageView.bottomAnchor, constant: 20),
             
             favoriteImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             favoriteImageView.topAnchor.constraint(equalTo: pokemonNameLabel.bottomAnchor, constant: 20),
@@ -102,6 +118,7 @@ final class PokemonDetailsViewControllerImpl: UIViewController, PokemonDetailsVi
             deleteImageView.topAnchor.constraint(equalTo: favoriteImageView.bottomAnchor, constant: 20),
             deleteImageView.heightAnchor.constraint(equalToConstant: 60),
             deleteImageView.widthAnchor.constraint(equalToConstant: 60),
+            
         ])
     }
 }

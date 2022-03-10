@@ -115,6 +115,7 @@
 				847BBC6427CF7FB7005E8A6C /* Common */,
 				847BBC6627CF7FD3005E8A6C /* Scenes */,
 				847BBC6527CF7FC3005E8A6C /* Resources */,
+				847BBCA927D9B110005E8A6C /* Helpers */,
 				847BBC6727CF7FDE005E8A6C /* Utilities */,
 				847BBC6327CF7FA9005E8A6C /* Application */,
 			);
@@ -217,7 +218,6 @@
 				847BBC8127D1BAA7005E8A6C /* PokemonsListAssembler.swift */,
 				847BBC7B27CF81E2005E8A6C /* PokemonCell.swift */,
 				847BBC8B27D60675005E8A6C /* ProgressCell.swift */,
-				847BBCA727D9AAB6005E8A6C /* RefreshControl.swift */,
 			);
 			path = PokemonsList;
 			sourceTree = "<group>";
@@ -242,6 +242,14 @@
 				847BBC9F27D72D07005E8A6C /* Service.swift */,
 			);
 			path = DataStoreManager;
+			sourceTree = "<group>";
+		};
+		847BBCA927D9B110005E8A6C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				847BBCA727D9AAB6005E8A6C /* RefreshControl.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

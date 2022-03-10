@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonDetailsViewController: AnyObject {
-    func configure(state: State)
+    func configure(pokemon: Pokemon)
     var deleteOrFavoriteClosure: ((DeleteOrFavorite) -> ())? { get set }
 }
 
@@ -33,21 +33,32 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     
     func onViewAttached(controller: PokemonDetailsViewController) {
         self.controller = controller
-//        fetchPokemon()
-        controller.configure(state: .Success(pokemon))
+        fetchPokemon()
+        
         configureState()
     }
     
-    private func fetchPokemon(kk: Result<Poke, Error>) {
-        interactor.fetchPokemonByUrl { result in
-            switch result {
-            case .success(let poke):
-                self.controller?.configure(state: .Success(poke))
+    private func fetchPokemon() {
+        interactor.fetchPokemonByUrl(url: pokemon.url) { state in
+            switch state {
             case .failure(let error):
-                self.controller?.configure(state: .Error(error))
+                print(error)
+            case .success(let pokemon):
+                self.controller?.configure(pokemon: pokemon)
             }
         }
     }
+    
+//    private func fetchPokemon() {
+//        interactor.fetchPokemonByUrl { result in
+//            switch result {
+//            case .success(let poke):
+//                self.controller?.configure(state: .Success(poke))
+//            case .failure(let error):
+//                self.controller?.configure(state: .Error(error))
+//            }
+//        }
+//    }
     
     private func configureState() {
         controller?.deleteOrFavoriteClosure = { state in

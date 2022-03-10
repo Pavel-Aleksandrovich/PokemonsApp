@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PokemonsTable {
-    func setPokemons(pokemons: [Poke])
+    func setPokemons(pokemons: PokemonList)
     var pageClosure: (() -> ())? { get set }
 }
 
@@ -39,8 +39,8 @@ final class PokemonsTableImpl: NSObject, PokemonsTable, UITableViewDelegate, UIT
         configureTableView()
     }
     
-    func setPokemons(pokemons: [Poke]) {
-        self.pokemons.append(contentsOf: pokemons)
+    func setPokemons(pokemons: PokemonList) {
+        self.pokemons.append(contentsOf: pokemons.results)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
