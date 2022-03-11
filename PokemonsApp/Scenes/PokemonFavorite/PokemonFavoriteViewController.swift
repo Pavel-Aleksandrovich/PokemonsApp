@@ -33,7 +33,6 @@ final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavorite
         super.viewDidLoad()
         createTableView()
         presenter.onViewAttached(controller: self)
-        configureView()
     }
     
     func getPokemons(pokemons: [PokemonEntity]) {
@@ -41,22 +40,6 @@ final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavorite
     }
     
     private func createTableView() {
-        table = PokemonFavoriteTable(tableView: tableView)
-    }
-    
-    private func configureView() {
-        
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.backgroundColor = .white
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        table = PokemonFavoriteTable(tableView: tableView, viewController: self)
     }
 }

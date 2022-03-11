@@ -16,14 +16,15 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
         static let title = "Pokemons"
     }
     
+    private weak var viewController: UIViewController?
     private var tableView: UITableView
     private var pokemons: [PokemonEntity] = []
     
-    init(tableView: UITableView) {
+    init(tableView: UITableView, viewController: UIViewController) {
         self.tableView = tableView
+        self.viewController = viewController
         super.init()
-        tableView.delegate = self
-        tableView.dataSource = self
+        configureTableView()
     }
     
     func setPokemons(pokemons: [PokemonEntity]) {
@@ -46,5 +47,25 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         Constants.heightForRow
+    }
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        guard let view = viewController?.view else { return }
+        
+        view.backgroundColor = .white
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }

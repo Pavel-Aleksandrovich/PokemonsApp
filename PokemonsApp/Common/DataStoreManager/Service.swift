@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol PokemonService {
-    func createPokemon(sourcePokemon: Poke)
+    func createPokemon(sourcePokemon: CustomPokemon)
     func getAllPokemons() -> [PokemonEntity]
     func getNumberOfPokemons() -> Int
     func getPokemonBy(id: NSManagedObjectID) -> PokemonEntity?
@@ -24,9 +24,10 @@ final class PokemonServiceImpl: PokemonService {
         self.coreDataManager = coreDataManager
     }
     
-    func createPokemon(sourcePokemon: Poke) {
+    func createPokemon(sourcePokemon: CustomPokemon) {
         let pokemon = PokemonEntity(context: coreDataManager.context)
         pokemon.name = sourcePokemon.name
+        pokemon.pokemonImage = sourcePokemon.image
         coreDataManager.saveContext()
     }
     

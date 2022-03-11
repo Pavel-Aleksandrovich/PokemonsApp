@@ -23,6 +23,7 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private let interactor: PokemonsInteractor
     private let pokemonService: PokemonService
     private let pokemon: Poke
+    private var customPokemon: CustomPokemon?
     
     init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemonService: PokemonService, pokemon: Poke) {
         self.router = router
@@ -52,8 +53,8 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private func configure(pokemon: Pokemon) {
         let url = pokemon.sprites.frontDefault
         interactor.loadPokemonPhotoBy(url: url) { data in
-            let customPokemon = CustomPokemon(name: pokemon.name, image: data)
-            self.controller?.configure(pokemon: customPokemon)
+            self.customPokemon = CustomPokemon(name: pokemon.name, image: data)
+            self.controller?.configure(pokemon: self.customPokemon!)
         }
     }
     
@@ -69,7 +70,7 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     }
     
     private func addToFavorite() {
-        pokemonService.createPokemon(sourcePokemon: pokemon)
+        pokemonService.createPokemon(sourcePokemon: customPokemon!)
     }
     
     private func deleteFromFavorite() {
