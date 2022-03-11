@@ -228,12 +228,12 @@
 		847BBC8D27D7189F005E8A6C /* PokemonFavorite */ = {
 			isa = PBXGroup;
 			children = (
-				847BBC8E27D718B3005E8A6C /* PokemonFavoriteViewController.swift */,
 				847BBC9827D725F3005E8A6C /* PokemonFavoriteTable.swift */,
-				847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */,
+				847BBC8E27D718B3005E8A6C /* PokemonFavoriteViewController.swift */,
 				847BBC9027D71904005E8A6C /* PokemonFavoritePresenter.swift */,
 				847BBC9227D7199A005E8A6C /* PokemonFavoriteRouter.swift */,
 				847BBC9427D71A05005E8A6C /* PokemonFavoriteAssembler.swift */,
+				847BBC9A27D726D1005E8A6C /* FavoriteCell.swift */,
 			);
 			path = PokemonFavorite;
 			sourceTree = "<group>";

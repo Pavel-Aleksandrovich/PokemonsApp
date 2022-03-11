@@ -24,13 +24,13 @@ final class PokemonsTableImpl: NSObject, PokemonsTable, UITableViewDelegate, UIT
     private let refreshControl: RefreshControl
     private weak var viewController: UIViewController?
     private let tableView: UITableView
-    private let onCellTappedClosure: (Poke) -> ()
+    private let onCellTappedClosure: (String) -> ()
     private var pokemons: [Poke] = []
     private var isLoading = false
     
     var pageClosure: (() -> ())?
     
-    init(tableView: UITableView, viewController: UIViewController, onCellTappedClosure: @escaping (Poke) -> ()) {
+    init(tableView: UITableView, viewController: UIViewController, onCellTappedClosure: @escaping (String) -> ()) {
         self.tableView = tableView
         self.viewController = viewController
         self.onCellTappedClosure = onCellTappedClosure
@@ -102,7 +102,7 @@ final class PokemonsTableImpl: NSObject, PokemonsTable, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        onCellTappedClosure(pokemons[indexPath.row])
+        onCellTappedClosure(pokemons[indexPath.row].url)
     }
     
     private func configureTableView() {

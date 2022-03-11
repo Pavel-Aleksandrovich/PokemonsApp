@@ -39,8 +39,8 @@ final class PokemonsListViewControllerImpl: UIViewController, PokemonsListViewCo
     }
     
     private func createTableView() {
-        table = PokemonsTableImpl(tableView: tableView, viewController: self, onCellTappedClosure: { [weak self] pokemon in
-            self?.presenter.onCellTapped(pokemon: pokemon)
+        table = PokemonsTableImpl(tableView: tableView, viewController: self, onCellTappedClosure: { [weak self] url in
+            self?.presenter.onCellTapped(url: url)
         })
         loadMorePokemons()
     }

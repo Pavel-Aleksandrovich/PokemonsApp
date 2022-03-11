@@ -11,18 +11,18 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     
     private enum Constants {
         static let cellIdentifier = "FavoriteCell"
-        static let progressCellIdentifier = "progressCellIdentifier"
-        static let heightForRow: CGFloat = 80
-        static let title = "Pokemons"
+        static let heightForRow: CGFloat = 100
     }
     
     private weak var viewController: UIViewController?
     private var tableView: UITableView
     private var pokemons: [PokemonEntity] = []
+    private let complitionHandler: (Int) -> ()
     
-    init(tableView: UITableView, viewController: UIViewController) {
+    init(tableView: UITableView, viewController: UIViewController, complitionHandler: @escaping (Int) -> ()) {
         self.tableView = tableView
         self.viewController = viewController
+        self.complitionHandler = complitionHandler
         super.init()
         configureTableView()
     }
@@ -47,6 +47,21 @@ final class PokemonFavoriteTable: NSObject, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         Constants.heightForRow
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            complitionHandler(indexPath.row)
+            pokemons.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func configureTableView() {

@@ -8,15 +8,15 @@
 import UIKit
 
 protocol PokemonsListRouter {
-    func presentPokemonDetails(pokemon: Poke)
+    func presentPokemonDetails(url: String)
 }
 
 final class PokemonsListRouterImpl: PokemonsListRouter {
     
     weak var controller: UIViewController?
     
-    func presentPokemonDetails(pokemon: Poke) {
-        let vc = PokemonDetailsAssembler.assembly(pokemon: pokemon)
+    func presentPokemonDetails(url: String) {
+        let vc = PokemonDetailsAssembler.assembly(url: url)
         controller?.navigationController?.pushViewController(vc, animated: true)
     }
 }

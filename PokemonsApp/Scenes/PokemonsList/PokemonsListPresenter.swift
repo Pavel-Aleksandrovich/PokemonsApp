@@ -17,7 +17,7 @@ protocol PokemonsListViewController: AnyObject {
 
 protocol PokemonsListPresenter {
     func onViewAttached(controller: PokemonsListViewController)
-    func onCellTapped(pokemon: Poke)
+    func onCellTapped(url: String)
     func fetchPokemons(page: Int)
 }
 
@@ -38,8 +38,8 @@ final class PokemonsListPresenterImpl: PokemonsListPresenter {
         controller.showProgress()
     }
     
-    func onCellTapped(pokemon: Poke) {
-        router.presentPokemonDetails(pokemon: pokemon)
+    func onCellTapped(url: String) {
+        router.presentPokemonDetails(url: url)
     }
     
     func fetchPokemons(page: Int) {

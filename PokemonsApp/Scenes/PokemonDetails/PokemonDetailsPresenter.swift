@@ -22,25 +22,24 @@ final class PokemonDetailsPresenterImpl: PokemonDetailsPresenter {
     private let router: PokemonDetailsRouter
     private let interactor: PokemonsInteractor
     private let pokemonService: PokemonService
-    private let pokemon: Poke
+    private let url: String
     private var customPokemon: CustomPokemon?
     
-    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemonService: PokemonService, pokemon: Poke) {
+    init(router: PokemonDetailsRouter, interactor: PokemonsInteractor, pokemonService: PokemonService, url: String) {
         self.router = router
         self.interactor = interactor
         self.pokemonService = pokemonService
-        self.pokemon = pokemon
+        self.url = url
     }
     
     func onViewAttached(controller: PokemonDetailsViewController) {
         self.controller = controller
         fetchPokemon()
-        
         configureState()
     }
     
     private func fetchPokemon() {
-        interactor.fetchPokemonBy(url: pokemon.url) { state in
+        interactor.fetchPokemonBy(url: url) { state in
             switch state {
             case .failure(let error):
                 print(error)

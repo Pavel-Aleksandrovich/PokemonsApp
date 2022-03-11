@@ -10,10 +10,6 @@ import UIKit
 final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavoriteViewController {
 
     private enum Constants {
-        static let cellIdentifier = "FavoriteCell"
-        static let progressCellIdentifier = "progressCellIdentifier"
-        static let heightForRow: CGFloat = 80
-        static let title = "Pokemons"
     }
     
     private let presenter: PokemonFavoritePresenter
@@ -40,6 +36,8 @@ final class PokemonFavoriteViewControllerImpl: UIViewController, PokemonFavorite
     }
     
     private func createTableView() {
-        table = PokemonFavoriteTable(tableView: tableView, viewController: self)
+        table = PokemonFavoriteTable(tableView: tableView, viewController: self, complitionHandler: { index in
+            self.presenter.complitionTapped(index: index)
+        })
     }
 }
